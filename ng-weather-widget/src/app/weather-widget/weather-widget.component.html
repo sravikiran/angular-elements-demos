@@ -1,0 +1,22 @@
+<div class="card" style="width: 18rem;" *ngIf="weatherData">
+  <div class="card-body">
+    <div class="card-title">Weather of {{weatherData.name}}
+      <img src="http://openweathermap.org/img/w/{{weatherData.weather[0].icon}}.png" alt="" class="float-right">
+    </div>
+    <div class="card-subtitle mb-2" style="font-weight: bold;">{{weatherData.weather[0].main}}
+      <div class="float-right">{{temperature | number:'1.0-0'}}
+        <sup>0</sup>
+        <span *ngIf="isCelcius">C</span>
+        <span *ngIf="!isCelcius">F</span>
+        <button class="btn btn-link" (click)="changeUnit()">
+          <span *ngIf="isCelcius">F</span>
+          <span *ngIf="!isCelcius">C</span>
+        </button>
+      </div>
+    </div>
+
+    <p class="card-text">Humidity: {{weatherData.main.humidity}}%</p>
+    <p class="card-text">Wind: {{weatherData.wind.speed}} m/s</p>
+    <p class="card-text">Cloudiness: {{weatherData.clouds.all}}%</p>
+  </div>
+</div>

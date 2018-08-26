@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather widget in HTML!</title>
+    <link rel="stylesheet" href="elements/styles.css">
+</head>
+
+<body>
+    Select a city:
+    <select id="selectCity">
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Chennai">Chennai</option>
+        <option value="Kolkata">Kolkata</option>
+        <option value="Ahmedabad">Ahmedabad</option>
+    </select>
+    <weather-widget></weather-widget>
+    <ng-hello></ng-hello>
+    <hello-world></hello-world>
+    <script src="./elements/weather-widget.js"></script>
+    <script>
+        (function () {
+            let select = document.querySelector('#selectCity');
+            let widget = document.querySelector('weather-widget');
+            select.onchange = function () {
+                console.log(select.selectedOptions[0].value);
+                widget.cityName = select.selectedOptions[0].value;
+            };
+            // widget.cityNotFound = function () {
+            //     select.selectedIndex = 0;
+            //     select.dispatchEvent(new Event('change'));
+            // };
+            widget.addEventListener('cityNotFound', function () {
+                select.selectedIndex = 0;
+                select.dispatchEvent(new Event('change'));
+            });
+        }());
+    </script>
+</body>
+
+</html>
