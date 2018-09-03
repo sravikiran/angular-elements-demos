@@ -9,10 +9,19 @@ class App extends Component {
       city: 'Mumbai'
     };
     this.cityNotFoundHandler = this.cityNotFoundHandler.bind(this);
+    this.weatherWidgetRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.weatherWidgetRef.current.addEventListener('cityNotFound', (e) => {
+      console.log(e);
+      this.setState({
+        city: 'Hyderabad'
+      });
+    });
   }
 
   handleChange(e) {
-    console.log(e);
     this.setState({
       city: e.target.value
     })
@@ -43,12 +52,11 @@ class App extends Component {
             </select>
           </div>
 
-          <weather-widget city-name={this.state.city}></weather-widget>
+          <weather-widget city-name={this.state.city} ref={this.weatherWidgetRef}></weather-widget>
         </div>
       </div>
     );
   }
 }
-
 
 export default App;
