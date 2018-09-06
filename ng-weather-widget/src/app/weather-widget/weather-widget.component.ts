@@ -16,14 +16,14 @@ export class WeatherWidgetComponent implements OnInit, OnChanges {
   cityNotFound = new EventEmitter<string>();
 
   weatherData: any;
-  isCelcius: boolean;
+  isCelsius: boolean;
 
   constructor(private weatherDataSvc: WeatherDataService,
     private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
-    this.isCelcius = true;
+    this.isCelsius = true;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -42,11 +42,11 @@ export class WeatherWidgetComponent implements OnInit, OnChanges {
   }
 
   get temperature() {
-    return this.isCelcius ? this.weatherData.main.temp : this.weatherData.main.temp / 5 * 9 + 32;
+    return this.isCelsius ? this.weatherData.main.temp : this.weatherData.main.temp / 5 * 9 + 32;
   }
 
   changeUnit() {
-    this.isCelcius = !this.isCelcius;
+    this.isCelsius = !this.isCelsius;
     this.cdr.detectChanges();
   }
 }
