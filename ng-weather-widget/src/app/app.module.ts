@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injector } from '@angular/core';
+import { NgModule, Injector, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { createCustomElement } from '@angular/elements';
 
 import { AppComponent } from './app.component';
 import { WeatherWidgetComponent } from './weather-widget/weather-widget.component';
+import { createCustomElement } from '@angular/elements';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -16,16 +17,22 @@ import { WeatherWidgetComponent } from './weather-widget/weather-widget.componen
     FormsModule
   ],
   providers: [],
-  bootstrap: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [
-    WeatherWidgetComponent,
+    AppComponent,
+    WeatherWidgetComponent
   ]
 })
-export class AppModule { 
+export class AppModule {
   constructor(private injector: Injector) { }
 
-  ngDoBootstrap(){
+  ngDoBootstrap(app) {
     const el = createCustomElement(WeatherWidgetComponent, { injector: this.injector });
     customElements.define('weather-widget', el);
+
+    if ((environment as any).name !== 'elements') {
+      app.bootstrap(AppComponent);
+    }
   }
+
 }

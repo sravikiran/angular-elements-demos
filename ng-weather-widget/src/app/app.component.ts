@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
+import { createCustomElement } from '@angular/elements';
+import { WeatherWidgetComponent } from './weather-widget/weather-widget.component';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,10 @@ export class AppComponent {
   cities = ['Hyderabad', 'Bangalore', 'Delhi', 'Mumbai', 'Chennai', 'Kolkata', 'Ahmedabad'];
   alert: boolean = false;
 
-  notFound(name: string){
+  constructor(injector: Injector) {
+  }
+
+  notFound(name: string) {
     this.alert = true;
     this.city = "Hyderabad";
     setTimeout(() => {
