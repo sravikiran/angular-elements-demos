@@ -24,4 +24,4 @@ Select a city: <select [(ngModel)]="city">
   <option *ngFor="let c of cities" value="{{c}}">{{c}}</option>
 </select>
 <br>
-<app-weather-widget [cityName]="city" (cityNotFound)="notFound($event)"></app-weather-widget>
+<weather-widget [cityName]="city" (cityNotFound)="notFound($event)"></weather-widget>
